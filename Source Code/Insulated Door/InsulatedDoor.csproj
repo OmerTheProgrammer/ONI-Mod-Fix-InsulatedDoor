@@ -47,7 +47,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SpacedOutRelease|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\SpacedOutRelease\</OutputPath>
-    <DefineConstants>TRACE;SPACED_OUT</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;SPACED_OUT</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -94,6 +94,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="mod_info.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="InsulatedManualPressureDoor\InsulatedManualPressureDoorConfig.cs" />
     <Compile Include="TinyInsulatedManualPressureDoor\TinyInsulatedManualPressureDoorConfig.cs" />
     <Compile Include="InsulatedPressureDoor\InsulatedPressureDoorConfig.cs" />

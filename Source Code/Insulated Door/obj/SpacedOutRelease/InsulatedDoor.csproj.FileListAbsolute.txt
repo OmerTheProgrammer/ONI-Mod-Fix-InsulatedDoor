@@ -97,3 +97,11 @@ C:\Users\omer1\Source\Repos\ModNotIncluded\Source Code\Insulated Door\bin\Spaced
 C:\Users\omer1\Source\Repos\ModNotIncluded\Source Code\Insulated Door\obj\SpacedOutRelease\Insulate.BE139460.Up2Date
 C:\Users\omer1\Source\Repos\ModNotIncluded\Source Code\Insulated Door\obj\SpacedOutRelease\InsulatedDoor.dll
 C:\Users\omer1\Source\Repos\ModNotIncluded\Source Code\Insulated Door\obj\SpacedOutRelease\InsulatedDoor.pdb
+C:\Users\omer1\source\repos\OmerTheProgrammer\ONI-Mod-Fix-InsulatedDoor\Source Code\Insulated Door\bin\SpacedOutRelease\mod_info.yaml
+C:\Users\omer1\source\repos\OmerTheProgrammer\ONI-Mod-Fix-InsulatedDoor\Source Code\Insulated Door\bin\SpacedOutRelease\InsulatedDoor.dll
+C:\Users\omer1\source\repos\OmerTheProgrammer\ONI-Mod-Fix-InsulatedDoor\Source Code\Insulated Door\bin\SpacedOutRelease\InsulatedDoor.pdb
+C:\Users\omer1\source\repos\OmerTheProgrammer\ONI-Mod-Fix-InsulatedDoor\Source Code\Insulated Door\obj\SpacedOutRelease\InsulatedDoor.csproj.AssemblyReference.cache
+C:\Users\omer1\source\repos\OmerTheProgrammer\ONI-Mod-Fix-InsulatedDoor\Source Code\Insulated Door\obj\SpacedOutRelease\InsulatedDoor.csproj.CoreCompileInputs.cache
+C:\Users\omer1\source\repos\OmerTheProgrammer\ONI-Mod-Fix-InsulatedDoor\Source Code\Insulated Door\obj\SpacedOutRelease\Insulate.BE139460.Up2Date
+C:\Users\omer1\source\repos\OmerTheProgrammer\ONI-Mod-Fix-InsulatedDoor\Source Code\Insulated Door\obj\SpacedOutRelease\InsulatedDoor.dll
+C:\Users\omer1\source\repos\OmerTheProgrammer\ONI-Mod-Fix-InsulatedDoor\Source Code\Insulated Door\obj\SpacedOutRelease\InsulatedDoor.pdb
