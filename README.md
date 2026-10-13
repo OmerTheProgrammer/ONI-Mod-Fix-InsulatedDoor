@@ -1,1 +1,1 @@
-This is a replacment mod to fix Davkas.Inc modding lab's insulated door mod.
+This is a replacment mod (insulated doors) to fix Davkas.Inc modding lab's insulated door mod.
