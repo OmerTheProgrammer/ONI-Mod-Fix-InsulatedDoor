@@ -9,12 +9,14 @@ namespace InsulatedDoorsMod
     [HarmonyPatch("Initialize")]
     public static class Db_Initialize_Patch
     {
+        private static bool initialized = false;
+
         public static void Prefix()
         {
 #if VANILLA
-            // Valilla prefers prefix() for adding buildings
+            // Vanilla prefers prefix() for adding buildings
             doorHelpers.doorBuildMenu(InsulatedManualPressureDoorConfig.ID, InsulatedManualPressureDoorConfig.menu, InsulatedManualPressureDoorConfig.pred);
-            doorHelpers.doorBuildMenu(InsulatedPressureDoorConfig.ID, InsulatedPressureDoorConfig.menu, InsulatedPressureDoorConfig.pred);
+            doorHelpers.doorBuildMenu(InsulatedPressureDoorConfig.ID, InsulatedPressureDoorConfig.menu, InsulatedManualPressureDoorConfig.pred);
             doorHelpers.doorBuildMenu(TinyInsulatedManualPressureDoorConfig.ID, TinyInsulatedManualPressureDoorConfig.menu, TinyInsulatedManualPressureDoorConfig.pred);
             doorHelpers.doorBuildMenu(TinyInsulatedPressureDoorConfig.ID, TinyInsulatedPressureDoorConfig.menu, TinyInsulatedPressureDoorConfig.pred);
 #endif
@@ -22,14 +24,20 @@ namespace InsulatedDoorsMod
 
         public static void Postfix()
         {
+            //to not add the doors multiple times if the game reloads the db
+            if (initialized)
+                return;
+
+            initialized = true;
+
 #if SPACED_OUT
             // DLC prefers postfix() for adding buildings
             doorHelpers.doorBuildMenu(InsulatedManualPressureDoorConfig.ID, InsulatedManualPressureDoorConfig.menu, InsulatedManualPressureDoorConfig.pred);
-            doorHelpers.doorBuildMenu(InsulatedPressureDoorConfig.ID, InsulatedPressureDoorConfig.menu,InsulatedPressureDoorConfig.pred);
+            doorHelpers.doorBuildMenu(InsulatedPressureDoorConfig.ID, InsulatedPressureDoorConfig.menu, InsulatedPressureDoorConfig.pred);
             doorHelpers.doorBuildMenu(TinyInsulatedManualPressureDoorConfig.ID, TinyInsulatedManualPressureDoorConfig.menu, TinyInsulatedManualPressureDoorConfig.pred);
             doorHelpers.doorBuildMenu(TinyInsulatedPressureDoorConfig.ID, TinyInsulatedPressureDoorConfig.menu, TinyInsulatedPressureDoorConfig.pred);
 #endif
-            // Both prefer postfix() for adding tech tree entries
+            // Both prefer postfix() for adding tech tree entries (1 entry per door)
             doorHelpers.doorTechTree(InsulatedManualPressureDoorConfig.ID, InsulatedManualPressureDoorConfig.tech);
             doorHelpers.doorTechTree(InsulatedPressureDoorConfig.ID, InsulatedPressureDoorConfig.tech);
             doorHelpers.doorTechTree(TinyInsulatedManualPressureDoorConfig.ID, TinyInsulatedManualPressureDoorConfig.tech);
@@ -73,22 +81,37 @@ namespace InsulatedDoorsMod
     {
         public static void doorBuildMenu(string door, string menu, string pred)
         {
+            // check if the door is already in the plan order
+            foreach (var planInfo in TUNING.BUILDINGS.PLANORDER)
+            {
+                if (planInfo.data is IList<string> existingList && existingList.Contains(door))
+                {
+                    return;
+                }
+            }
+
+            // find the index of the specified menu category in the plan order
             int index = TUNING.BUILDINGS.PLANORDER.FindIndex(x => x.category == menu);
             if (index < 0)
                 return;
-            else
+
+            // get the data list for the specified menu category
+            IList<string> data = TUNING.BUILDINGS.PLANORDER[index].data as IList<string>;
+            if (data == null)
+                return;
+
+            // find the index of the specified predecessor in the data list
+            int num = -1;
+            foreach (string str in (IEnumerable<string>)data)
             {
-                IList<string> data = TUNING.BUILDINGS.PLANORDER[index].data as IList<string>;
-                int num = -1;
-                foreach (string str in (IEnumerable<string>)data)
-                {
-                    if (str.Equals(pred))
-                        num = data.IndexOf(str);
-                }
-                if (num == -1)
-                    return;
-                else
-                    data.Insert(num + 1, door);
+                if (str.Equals(pred))
+                    num = data.IndexOf(str);
+            }
+
+            // insert the door after the predecessor if it was found
+            if (num != -1)
+            {
+                data.Insert(num + 1, door);
             }
         }
 

@@ -1,0 +1,6 @@
+﻿title: "Insulated Doors"
+description: "Fixes issues with the Insulated Door."
+staticID: "Insulated Doors"
+supportedContent: ALL
+minimumSupportedBuild: 500000
+APIVersion: 2
