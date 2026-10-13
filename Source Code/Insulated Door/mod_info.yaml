@@ -1,6 +1,6 @@
 ﻿title: "Insulated Doors"
-description: "Fixes issues with the Insulated Door."
-staticID: "Insulated Doors"
+description: "Adds insulated pressure doors."
+staticID: "InsulatedDoors"
 supportedContent: ALL
 minimumSupportedBuild: 500000
 APIVersion: 2
