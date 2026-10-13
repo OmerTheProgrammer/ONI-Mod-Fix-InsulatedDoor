@@ -4,3 +4,4 @@ staticID: "Insulated Doors"
 supportedContent: ALL
 minimumSupportedBuild: 500000
 APIVersion: 2
+content: DLL, Animation

@@ -23,11 +23,23 @@ public class TinyInsulatedPressureDoorConfig : IBuildingConfig
           BUILDINGS.CONSTRUCTION_MASS_KG.TIER4[0],
           BUILDINGS.CONSTRUCTION_MASS_KG.TIER2[0]
         };
-        string[] construction_materials                                              = strArray;
-        EffectorValues none                                                          = NOISE_POLLUTION.NONE;
-        EffectorValues tieR1                                                         = BUILDINGS.DECOR.PENALTY.TIER1;
-        EffectorValues noise                                                         = none;
-        BuildingDef buildingDef                                                      = BuildingTemplates.CreateBuildingDef("TinyInsulatedPressureDoor", 1, 1, "Tiny_Insulated_door_external_kanim", 30, 30f, construction_mass, construction_materials, 1600f, BuildLocationRule.Tile, tieR1, noise, 1f);
+        string[] construction_materials = strArray;
+        EffectorValues none = NOISE_POLLUTION.NONE;
+        EffectorValues tieR1 = BUILDINGS.DECOR.PENALTY.TIER1;
+        EffectorValues noise = none;
+
+        KAnimFile animFile = Assets.GetAnim("Tiny_Insulated_door_external_kanim");
+        if (animFile == null)
+        {
+            Debug.LogError("[Insulated Doors] Failed to find animation: Tiny_Insulated_door_external_kanim!");
+        }
+
+        BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("TinyInsulatedPressureDoor", 1, 1,
+            "Tiny_Insulated_door_external_kanim", 30, 30f, construction_mass, construction_materials, 1600f,
+            BuildLocationRule.Tile, tieR1, noise, 1f);
+
+        buildingDef.AnimFiles = new KAnimFile[] { animFile };
+
         buildingDef.ThermalConductivity                                              = 0.01f;
         buildingDef.Overheatable                                                     = false;
         buildingDef.RequiresPowerInput                                               = true;

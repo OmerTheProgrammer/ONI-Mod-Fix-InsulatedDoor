@@ -18,13 +18,27 @@ public class InsulatedManualPressureDoorConfig : IBuildingConfig
           "BuildableRaw",
           "Metal"
         };
+
         float[] construction_mass = new float[2]
         {
           BUILDINGS.CONSTRUCTION_MASS_KG.TIER5[0],
           BUILDINGS.CONSTRUCTION_MASS_KG.TIER3[0]
         };
+
         string[] construction_materials = strArray;
-        BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("InsulatedManualPressureDoor", 1, 2, "Insulated_door_manual_kanim", 30, 60f, construction_mass, construction_materials, 1600f, BuildLocationRule.Tile, BUILDINGS.DECOR.PENALTY.TIER2, NOISE_POLLUTION.NONE, 1f);
+
+        KAnimFile animFile = Assets.GetAnim("Insulated_door_manual_kanim");
+        if (animFile == null)
+        {
+            Debug.LogError("[Insulated Doors] Failed to find animation: Insulated_door_manual_kanim!");
+        }
+
+        BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("InsulatedManualPressureDoor", 1, 2,
+            "Insulated_door_manual_kanim", 30, 60f, construction_mass, construction_materials, 1600f,
+            BuildLocationRule.Tile, BUILDINGS.DECOR.PENALTY.TIER2, NOISE_POLLUTION.NONE, 1f);
+
+        buildingDef.AnimFiles = new KAnimFile[] { animFile };
+
         buildingDef.ThermalConductivity = 0.01f;
         buildingDef.Overheatable = false;
         buildingDef.Floodable = false;
@@ -35,9 +49,12 @@ public class InsulatedManualPressureDoorConfig : IBuildingConfig
         buildingDef.PermittedRotations = PermittedRotations.R90;
         buildingDef.SceneLayer = Grid.SceneLayer.TileMain;
         buildingDef.ForegroundLayer = Grid.SceneLayer.InteriorWall;
+
+
         SoundEventVolumeCache.instance.AddVolume("door_manual_kanim", "ManualPressureDoor_gear_LP", NOISE_POLLUTION.NOISY.TIER1);
         SoundEventVolumeCache.instance.AddVolume("door_manual_kanim", "ManualPressureDoor_open", NOISE_POLLUTION.NOISY.TIER2);
         SoundEventVolumeCache.instance.AddVolume("door_manual_kanim", "ManualPressureDoor_close", NOISE_POLLUTION.NOISY.TIER2);
+        
         return buildingDef;
     }
 

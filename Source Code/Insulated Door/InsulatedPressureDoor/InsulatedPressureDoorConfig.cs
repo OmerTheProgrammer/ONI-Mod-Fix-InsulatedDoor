@@ -28,7 +28,19 @@ public class InsulatedPressureDoorConfig : IBuildingConfig
         EffectorValues none = NOISE_POLLUTION.NONE;
         EffectorValues tieR1 = BUILDINGS.DECOR.PENALTY.TIER1;
         EffectorValues noise = none;
-        BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("InsulatedPressureDoor", 1, 2, "Insulated_door_external_kanim", 30, 60f, construction_mass, construction_materials, 1600f, BuildLocationRule.Tile, tieR1, noise, 1f);
+
+        KAnimFile animFile = Assets.GetAnim("Insulated_door_external_kanim");
+        if (animFile == null)
+        {
+            Debug.LogError("[Insulated Doors] Failed to find animation: Insulated_door_external_kanim!");
+        }
+
+        BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("InsulatedPressureDoor", 1, 2,
+            "Insulated_door_external_kanim", 30, 60f, construction_mass, construction_materials, 1600f,
+            BuildLocationRule.Tile, tieR1, noise, 1f);
+
+        buildingDef.AnimFiles = new KAnimFile[] { animFile };
+
         buildingDef.ThermalConductivity = 0.01f;
         buildingDef.Overheatable = false;
         buildingDef.RequiresPowerInput = true;

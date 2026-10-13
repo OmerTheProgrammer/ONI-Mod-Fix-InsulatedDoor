@@ -114,6 +114,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetDir)*" "%25UserProfile%25\OneDrive\מסמכים\Klei\OxygenNotIncluded\mods\local\Insulated Doors\" /Y /I /E
-xcopy "$(ProjectDir)mod_info.yaml" "%25UserProfile%25\OneDrive\מסמכים\Klei\OxygenNotIncluded\mods\local\Insulated Doors\" /Y</PostBuildEvent>
+xcopy "$(ProjectDir)mod_info.yaml" "%25UserProfile%25\OneDrive\מסמכים\Klei\OxygenNotIncluded\mods\local\Insulated Doors\" /Y
+xcopy "$(ProjectDir)anim" "C:\Users\omer1\OneDrive\מסמכים\Klei\OxygenNotIncluded\mods\Local\Insulated Doors\anim" /E /Y /I
+
+
+
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

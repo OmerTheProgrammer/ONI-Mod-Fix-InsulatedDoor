@@ -24,7 +24,19 @@ public class TinyInsulatedManualPressureDoorConfig : IBuildingConfig
           BUILDINGS.CONSTRUCTION_MASS_KG.TIER2[0]
         };
         string[] construction_materials = strArray;
-        BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("TinyInsulatedManualPressureDoor", 1, 1, "Tiny_Insulated_door_manual_kanim", 30, 60f, construction_mass, construction_materials, 1600f, BuildLocationRule.Tile, BUILDINGS.DECOR.PENALTY.TIER2, NOISE_POLLUTION.NONE, 1f);
+
+        KAnimFile animFile = Assets.GetAnim("Tiny_Insulated_door_manual_kanim");
+        if (animFile == null)
+        {
+            Debug.LogError("[Insulated Doors] Failed to find animation: Tiny_Insulated_door_manual_kanim!");
+        }
+
+        BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("TinyInsulatedManualPressureDoor", 1, 1,
+            "Tiny_Insulated_door_manual_kanim", 30, 60f, construction_mass, construction_materials, 1600f,
+            BuildLocationRule.Tile, BUILDINGS.DECOR.PENALTY.TIER2, NOISE_POLLUTION.NONE, 1f);
+
+        buildingDef.AnimFiles = new KAnimFile[] { animFile };
+
         buildingDef.ThermalConductivity = 0.01f;
         buildingDef.Overheatable = false;
         buildingDef.Floodable = false;
